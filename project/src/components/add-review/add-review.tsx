@@ -2,13 +2,13 @@ import {Movie} from '../../types/types';
 import FilmCardHeader from '../film-card-header/film-card-header';
 
 type AddReviewProps = {
-  movie: Movie
+  promoMock: Movie
 }
 
-function AddReview({movie}: AddReviewProps): JSX.Element {
+function AddReview({promoMock}: AddReviewProps): JSX.Element {
   return (
     <section className="film-card film-card--full">
-      <FilmCardHeader movie={movie} />
+      <FilmCardHeader movie={promoMock} />
       <div className="add-review">
         <form action="#" className="add-review__form">
           <div className="rating">
