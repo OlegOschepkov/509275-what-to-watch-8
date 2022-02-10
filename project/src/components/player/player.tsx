@@ -1,10 +1,8 @@
-import {Movie} from '../../types/types';
+const stylePlayer = {
+  left: '30%',
+};
 
-type MoviesListProps = {
-  movie: Movie
-}
-
-function MoviesList({movie}: MoviesListProps): JSX.Element {
+function Player(): JSX.Element {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
@@ -15,7 +13,7 @@ function MoviesList({movie}: MoviesListProps): JSX.Element {
         <div className="player__controls-row">
           <div className="player__time">
             <progress className="player__progress" value="30" max="100"></progress>
-            <div className="player__toggler" style="left: 30%;">Toggler</div>
+            <div className="player__toggler" style={stylePlayer} >Toggler</div>
           </div>
           <div className="player__time-value">1:30:29</div>
         </div>
@@ -41,4 +39,4 @@ function MoviesList({movie}: MoviesListProps): JSX.Element {
   );
 }
 
-export default MoviesList;
+export default Player;
