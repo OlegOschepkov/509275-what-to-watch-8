@@ -7,9 +7,9 @@ import Login from '../login/login';
 import Film from '../film/film';
 import AddReview from '../add-review/add-review';
 import Player from '../player/player';
-import {promoMock} from '../../mock/mock';
 import PrivateRoute from '../private-route/private-route';
 import MyList from '../mylist/my-list';
+import NotFound from '../not-found/not-found';
 
 type AppScreenProps = {
   promo: Movie;
@@ -26,20 +26,35 @@ function App({promo, movies}: AppScreenProps): JSX.Element {
         <Route exact path={AppRoute.Login}>
           <Login />
         </Route>
-        {/*<Route exact path={AppRoute.MyList}>*/}
-        {/*  <MyList movies={movies} />*/}
-        {/*</Route>*/}
-        <Route exact path={AppRoute.Film}>
-          <Film promoMock={promoMock} />
+        <Route exact path={AppRoute.MyList}>
+          <MyList movies={movies} />
         </Route>
-        <PrivateRoute exact path={AppRoute.MyList} authorizationStatus={AuthorizationStatus.NoAuth} render={() => <MyList movies={movies} />} >
+        <Route exact path={AppRoute.Film} render={({match}) => {
+          const {id}: any = match.params;
+          return <Film movie={movies[id]} />;
+        }}
+        >
+        </Route>
+        <PrivateRoute
+          exact
+          path={AppRoute.MyList}
+          authorizationStatus={AuthorizationStatus.NoAuth}
+          render={() => <MyList movies={movies} />}
+        >
         </PrivateRoute>
-        <Route exact path={AppRoute.AddReview}>
-          <AddReview  promoMock={promoMock} />
+        <Route exact path={AppRoute.AddReview} render={({match}) => {
+          const {id}: any = match.params;
+          return <AddReview movie={movies[id]} />;
+        }}
+        >
         </Route>
-        <Route exact path={AppRoute.Player}>
-          <Player />
+        <Route exact path={AppRoute.Player} render={({match}) => {
+          const {id}: any = match.params;
+          return <Player movie={movies[id]} />;
+        }}
+        >
         </Route>
+        <Route component={NotFound}/>
       </Switch>
     </BrowserRouter>
   );
